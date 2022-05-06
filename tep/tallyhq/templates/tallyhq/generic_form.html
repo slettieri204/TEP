@@ -1,0 +1,92 @@
+
+<!-- THIS IS A GENERIC FORM TEMPLATE FOR SEMANTIC UI -->
+<!-- https://docs.djangoproject.com/en/3.0/topics/forms/ -->
+
+
+
+<!-- NOTE THESE QJUERY,SEMANTIC CSS AND JS FILES NEED TO BE HERE WHEN RUNNING THIS AS A STAND ALONE FORM -->
+<!-- WE DO NOT NEED THESE SOURCES WHEN SHOWING THIS GENERIC FORM IN A MODAL OF THE BASE.HTML --> 
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+
+  <form method="post" class="ui form segment" name="my_form">{% csrf_token %}
+  <h4 class="ui dividing header">{{form_header}}<br><!-- <i class="ui small"> {{ request.get_full_path }}</i> --></h4>
+        {% for field in form %}
+            <div class="field" >      
+
+                  <!-- cusomization for select fields -->
+                  {% if 'select' in field.field.widget.input_type  %}
+
+                    {{ field.label_tag }}
+                    <select class="ui dropdown" name="{{field.name}}" id="id_school">
+                          {% for choice in field.field.choices %}
+                                 <option value="{{choice.0}}"{% if field.value == choice.0 %} selected{% endif %}>{{choice.1}}</option>
+                          {% endfor %}
+                    </select> 
+
+                  <!-- cusomization for checkbox fields -->
+                  {% elif 'checkbox' in field.field.widget.input_type  %}
+                    <div class="ui toggle checkbox segment">
+                        {{ field }}
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    </div>
+
+
+                  <!-- cusomization for text fields -->
+                  {% elif 'text' in field.field.widget.input_type  %}
+                      {{ field.label_tag }} 
+                      <div class="ui input">
+                          <input type="text" name="{{field.name}}" maxlength="{{ field.field.max_length}}"  id="{{ field.id_for_label}}"  {% if field.field.required %} required {% endif %} placeholder=" {{field.label}}" value={{field.value|default_if_none:""}}>
+                      </div>
+
+                  <!-- cusomization for email fields -->
+                  {% elif 'email' in field.field.widget.input_type  %}
+                      {{ field.label_tag }} 
+                      <div class="ui input">
+                          <input type="email" name="{{field.name}}" maxlength="{{ field.field.max_length}}"  id="{{ field.id_for_label}}"  {% if field.field.required %} required {% endif %} placeholder=" {{field.label}}" value={{field.value|default_if_none:""}}>
+                      </div>
+
+                  <!-- all other field types --> 
+                  {% else %}
+                      {{ field.label_tag }} 
+                      <div class="ui input">
+                            {{ field }}
+                      </div>
+                  {% endif %}
+  
+
+                {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+      <br>
+      <div class="ui buttons">
+            <div class="ui large button" value="Previous Page" onClick="javascript:history.go(-1);">Back</div>
+       <div class="or"></div>
+        <input type="submit" value="Continue" class="ui large blue submit button">
+      </div>
+
+    {% if form.errors %}
+    <div class="ui red message">
+      <div class="header">We found some problems with this form!</div><br><br>
+          {% for field in form %}
+              {% for error in field.errors %}
+                   {{field.label}}: {{ error|escape }}
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+               {{ error|escape }}
+          {% endfor %}
+      </div>
+      {% endif %}
+
+
+  </form>
+
+<script>$('.ui.dropdown').dropdown();</script>   <!-- Needed for dropdown menu functionality  -->
+

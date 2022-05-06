@@ -1,0 +1,70 @@
+{% extends 'tallyhq/index.html' %}
+{% load static %}
+{% block content %}
+<div class='ui container'>
+<h2> Export CSV files from here</h2>
+<div class="ui cards centered">
+  <div class="blue card">
+    <div class="content">
+      <div class="header">Export since last</div>
+      <div class="description">
+      <form action="/tallyhq/exportdata/" method="post" id="form1" enctype="multipart/form-data">
+      	{% csrf_token %}
+        Export all orders since last export
+      </div>
+    </div>
+    <div class="ui bottom attached button">
+  
+		<button type="submit" name="exportsincelast" id="exportsincelast" class="ui blue submit button">
+		  <i class="download icon"></i>
+		  Export
+		</button>
+      </form>
+    </div>
+  </div>
+  <div class="green card">
+    <div class="content">
+      <div class="header">Custom Export</div>
+      <div class="description">
+      	  	   <form action="/tallyhq/exportdata/" method="post" id="form2" enctype="multipart/form-data">
+      	  	   	{% csrf_token %}
+        Start Date
+			<div class="ui calendar" id="startdate">
+			  <div class="ui input left icon">
+			    <i class="calendar icon"></i>
+			    <input type="date" name='startdate' id='startdate' placeholder="Date">
+			  </div>
+		</div>
+		 End Date
+			<div class="ui calendar" id="enddate">
+			  <div class="ui input left icon">
+			    <i class="calendar icon"></i>
+			    <input type="date" name='enddate' id='enddate' placeholder="Date">
+			  </div>
+		</div>
+
+      </div>
+    </div>
+    <div class="ui bottom attached button">
+
+		<button type="submit" name="customexport" id="customexport"  class="ui green submit button">
+		  <i class="download icon"></i>
+		  Export
+		</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<br>
+
+{% endblock %}
+
+{% block js_content %}
+<script type="text/javascript">
+
+// $('#example1').calendar();	
+
+</script>
+
+{% endblock %}

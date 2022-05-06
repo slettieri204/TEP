@@ -1,0 +1,114 @@
+{% extends 'tallyhq/index.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<style type="text/css">
+
+.ui.table {
+    font-size: 1.4em;
+}
+
+
+
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+tr {
+  text-align: center;
+}
+td {
+  text-align: center;
+}
+
+</style>
+<div class="ui container"><br>
+<h1> Manage TEP Items </h1>
+<div class="ui divider"></div>
+<i> <b style="color:green;display:inline" >Add</b> a new item here. </i><br>
+<i>You can also <b style="color:blue;display:inline" >edit</b> or <b style="color:red;display:inline">delete</b> individual schools. </i>
+
+<br><br>
+
+<div class="ui large buttons">
+      <a onclick="inject_url_in_modal('/tallyhq/item/add/')"><button class="ui basic green button"><i class="green add icon"></i>Add New Item</button></a>
+      <a onclick="inject_url_in_modal('/tallyhq/item/purge/')"><button class="ui basic red button"><i class="red remove icon"></i>Delete All Items</button></a>
+
+</div>
+
+{% if error %}
+<div class="ui negative message" style="width:100%">
+  <i class="close icon"></i>
+  <div class="header">
+    An error Occured
+  </div>
+  <p>{{ error | safe}}
+</p></div>
+{% endif %}
+
+ 
+
+
+<br><br><br>
+
+        <div class="row">
+            <div class="fourteen wide column">
+                <div class="ui segments">
+                    <div class="ui compact segment" style="border-top-width: 2px;border-top-style: solid;border-top-color: #faa21b;">
+                        <div class="ui large header" style="color: #faa21b;">
+
+                            <i class=" pencil icon" style="display: inline;color: #faa21b;"></i>
+                            Items <h6 style="display: inline;">(<i>ordered by increasing rank, checkout form is ordered the same</i>)</h6>  
+
+                        </div>
+                    </div>
+                    <div class="ui secondary segment">
+                        <div class="ui segment">
+                            <div class="">
+                                <br>
+                                {{ datatable }}
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+ </div> <!--container -->
+{% endblock %}
+
+{% block js_content %}
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css">
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js"></script>
+
+
+
+
+<!-- Load js for initializing tables via their server-side options -->
+<script type="text/javascript" charset="utf8" src="{% static 'tallyhq/datatableview.js' %}"></script>
+<script type="text/javascript">
+    $(function(){
+        var common_options = { "scrollX": true,"responsive": true};
+        datatableview.initialize($('.datatable'),common_options);
+    });
+</script>
+
+{% endblock %}

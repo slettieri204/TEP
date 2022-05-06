@@ -1,0 +1,210 @@
+{% extends 'tallyhq/index.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<style type="text/css">
+.ui.table {
+    font-size: 1.4em;
+}
+tr {
+  text-align: center;
+}
+td {
+  text-align: center;
+}
+</style>
+
+
+{% include "tallyhq/detailview_modal.html" %}
+<div class="container">
+    <div class="ui padded centered grid">
+        <div class="row">
+            <div class="seven wide column">
+                <div class="ui segments">
+                     <div class="ui compact segment" style="border-top-width: 2px;border-top-style: solid;border-top-color: #faa21b;">
+                        <div class="ui large header" style="color: #faa21b;">
+                            <i class="file icon" style="color: #faa21b;"></i>
+                            Waiver
+                        </div>
+                    </div>
+                    <div class="ui secondary segment">
+                        <div class="ui segment">
+                            <div class="ui two column grid">
+                                <table class="ui fixed single line celled table">
+                                    <tr>
+                                        <td>Last Upload: {{waiver_info.uploaded_date}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Current Waiver: {{waiver_info.file}}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="row">
+                                    <div class="column">
+                                        <a class="view-pdf">
+                                            <button class="ui icon button" style="background-color: #faa21b;color:white">
+                                                <i class="file outline pdf icon"></i>
+                                                View Waiver
+                                            </button>
+                                        </a>
+                                    </div>
+
+                                    <div class="column">
+                                        <form method="post" action="/tallyhq/waiverupload/"
+                                              enctype="multipart/form-data"
+                                              id='waiveruploadform'>
+                                            {% csrf_token %}
+                                            <label for="file" class="ui icon right floated button" <button class="ui icon button" style="background-color: #faa21b;color:white">
+                                                <i class="file icon"></i>
+                                                Upload Waiver</label>
+                                            <input type="file" id="file" name="file" style="display:none"
+                                                   onchange="form.submit()" class="inputfile" id="embedpollfileinput">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="seven wide column">
+                <div class="ui segments">
+                    <div class="ui compact segment" style="border-top-width: 2px;border-top-style: solid;border-top-color: #faa21b;">
+                        <div class="ui large header" style="color: #faa21b;">
+                            <i class="key icon" style="color: #faa21b;"></i>
+                            Password
+                        </div>
+                    </div>
+                    <div class="ui secondary segment">
+                        <div class="ui segment">
+                            <div class="ui two column grid">
+                                <table class="ui fixed single line celled table">
+                                    <tr>
+                                        <td>Current Password: {{form.digest.value}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Password Age: {{time_diff}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <form class="ui form" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <input type="password" name="digest" id="id_digest"
+                                                           style="width: 70%;margin-right: 1rem;" placeholder="enter new password" minlength="4" required>
+                                                    <button class="ui submit button" type="submit" style="margin-bottom: -5.5px;background-color: #faa21b;color:white">Reset Password
+                                                    </button>
+                                                </div>
+
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="fourteen wide column">
+                <div class="ui segments">
+                    <div class="ui compact segment" style="border-top-width: 2px;border-top-style: solid;border-top-color: #faa21b;">
+                        <div class="ui large header" style="color: #faa21b;">
+                            <button class="ui right floated button" style="background-color: #faa21b;color:white">
+                                <a href="/tallyhq/exportdata/" style="color: white;">
+                                Export Data
+                                    </a>
+                            </button>
+                            <i class=" shopping floated left cart icon" style="display: inline;color: #faa21b;"></i>
+                            Orders <h6 style="display: inline;"><i>(most recent orders shown first)</i></h6> 
+
+                        </div>
+                    </div>
+                    <div class="ui secondary segment">
+                        <div class="ui segment">
+                            <div class="ui two column grid">
+                                <br>
+                                {{ datatable }}
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    {% endblock %}
+
+
+    {% block js_content %}
+    <script type="text/javascript" language="JavaScript">
+$('.view-pdf').click(function () {
+    $('#my_modal_content').html('<iframe src="{{last_waiver_url}}" height="820" width="820"></iframe>');
+    $('#my_modal').modal('show');
+
+;});
+
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css">
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js"></script>
+
+
+
+
+    <!-- Load js for initializing tables via their server-side options -->
+    <script type="text/javascript" charset="utf8" src="{% static 'tallyhq/datatableview.js' %}"></script>
+    <script type="text/javascript">
+        $(function(){
+            datatableview.initialize($('.datatable'));
+        });
+    </script>
+
+    <script type="text/javascript">   // Use this to inject a view into a modal.
+    inject_url_in_detailmodal = function(my_url){
+            $.ajax({
+            url:my_url,
+            type:'GET',
+            success:function(data){
+                $('#table_body').empty()
+                 if ( data.length != 0 ) {
+                $.each(data, function(i, item) {
+
+                $('#order_id').html(item.order__pk);
+                var $tr = $('#table_body').append(
+                $('<tr>').append(
+                // $('<td>').text(item.order__pk),
+                $('<td>').text(item.item__name),
+                $('<td>').text(item.units_taken),)
+                );
+                $('#detail_modal').modal('show');
+
+            })
+            }
+            },
+            error:function(){
+                console.log('error')
+            },
+
+
+    });
+    }       
+
+    </script>
+
+
+    {% endblock %}

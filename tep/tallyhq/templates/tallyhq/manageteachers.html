@@ -1,0 +1,119 @@
+{% extends 'tallyhq/index.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<style type="text/css">
+.ui.table {
+    font-size: 1.4em;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+tr {
+  text-align: center;
+}
+td {
+  text-align: center;
+}
+
+
+</style>
+
+<div class="ui container">
+
+<br>
+<h1> Manage TEP Teachers </h1>
+<div class="ui divider"></div>
+<i> <b style="color:green;display:inline" >Upload</b> a list of teachers or <b style="color:green;display:inline" >add</b> a new teacher here. </i><br>
+<i>You can also <b style="color:blue;display:inline" >edit</b> or <b style="color:red;display:inline">delete</b> individual teachers. </i>
+<br><br>
+
+<div class="ui large buttons">
+      <a onclick="inject_url_in_modal('/tallyhq/teacher/add/')"><button class="ui green basic button"><i class="green add icon"></i>Add New Teacher</button></a>
+		<form method="post" action="/tallyhq/manageteachers/" id="myform" enctype="multipart/form-data">
+			{% csrf_token %}
+		  <input type="file" name="file"  onchange="form.submit()" class="inputfile" id="embedpollfileinput" />
+		  <label for="embedpollfileinput" class="ui green basic button">  <i class="ui green upload icon"></i>    Upload Teachers  </label>
+		</form>
+
+
+      <a onclick="inject_url_in_modal('/tallyhq/teacher/purge/')"><button class="ui red basic button"><i class="red remove icon"></i>Delete All Teachers</button></a>
+
+ </div>
+
+{% if error %}
+<div class="ui negative message" style="width:100%">
+  <i class="close icon"></i>
+  <div class="header">
+    An error Occured
+  </div>
+  <p>{{ error | safe}}
+</p></div>
+{% endif %}
+
+ 
+
+
+<br><br><br>
+
+        <div class="row">
+            <div class="fourteen wide column">
+                <div class="ui segments">
+                    <div class="ui compact segment" style="border-top-width: 2px;border-top-style: solid;border-top-color: #faa21b;">
+                        <div class="ui large header" style="color: #faa21b;">
+
+                            <i class=" apple icon" style="display: inline;color: #faa21b;"></i>
+                            Teachers <h6 style="display: inline;"></h6> 
+
+                        </div>
+                    </div>
+                    <div class="ui secondary segment">
+                        <div class="ui segment">
+                            <div class="">
+                                <br>
+                                {{ datatable }}
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+</div> <!--container -->
+{% endblock %}
+
+{% block js_content %}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css">
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js"></script>
+
+
+
+
+<!-- Load js for initializing tables via their server-side options -->
+<script type="text/javascript" charset="utf8" src="{% static 'tallyhq/datatableview.js' %}"></script>
+<script type="text/javascript">
+    $(function(){
+        var common_options = { "scrollX": true,"responsive": true};
+        datatableview.initialize($('.datatable'),common_options);
+    });
+</script>
+
+
+{% endblock %}

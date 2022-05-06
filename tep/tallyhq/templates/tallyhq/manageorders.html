@@ -1,0 +1,89 @@
+{% extends 'tallyhq/index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include "tallyhq/detailview_modal.html" %}
+
+
+<style type="text/css">
+
+.ui.table {
+    font-size: 1.4em;
+}
+
+tr {
+  text-align: center;
+}
+td {
+  text-align: center;
+}
+
+</style>
+<div class="ui container">
+<h1> TEP Orders </h1>
+<div class="ui divider"></div>
+<i> View the list of orders submitted by the teachers </i>
+<br><br>
+
+
+ 
+
+
+<br><br><br>
+
+{{datatable}}
+ </div> <!--container -->
+{% endblock %}
+
+{% block js_content %}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css">
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js"></script>
+
+
+
+
+<!-- Load js for initializing tables via their server-side options -->
+<script type="text/javascript" charset="utf8" src="{% static 'tallyhq/datatableview.js' %}"></script>
+<script type="text/javascript">
+    $(function(){
+        datatableview.initialize($('.datatable'));
+    });
+</script>
+
+
+<script type="text/javascript">   // Use this to inject a view into a modal.
+inject_url_in_detailmodal = function(my_url){
+	    $.ajax({
+        url:my_url,
+        type:'GET',
+        success:function(data){
+        	$('#table_body').empty()
+   			 if ( data.length != 0 ) {
+        	$.each(data, function(i, item) {
+        	var $tr = $('#table_body').append(
+        	$('<tr>').append(
+        	$('<td>').text(item.order__pk),
+            $('<td>').text(item.item__name),
+            $('<td>').text(item.units_taken),)
+        	);
+    		$('#detail_modal').modal('show');
+
+        })
+        }
+        },
+        error:function(){
+            console.log('error')
+        },
+
+
+});
+}	    
+
+</script>
+
+
+{% endblock %}

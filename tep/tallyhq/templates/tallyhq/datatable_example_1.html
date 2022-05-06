@@ -1,0 +1,32 @@
+{% extends 'tallyhq/index.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+.ui.table {
+    font-size: 1.2em;
+}
+
+</style>
+
+{{datatable}}
+{% endblock %}
+
+{% block js_content %}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css">
+
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js"></script>
+
+<!-- Load js for initializing tables via their server-side options -->
+<script type="text/javascript" charset="utf8" src="{% static 'tallyhq/datatableview.js' %}"></script>
+<script type="text/javascript">
+    $(function(){
+        datatableview.initialize($('.datatable'));
+    });
+</script>
+
+{% endblock %}
