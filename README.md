@@ -5,6 +5,7 @@ It was written in django and deployed using Heroku and AWS using a postgres back
 The login page for the app is here: http://gentle-crag-33999.herokuapp.com/ <br />
 Only teachers with a valid email address can log in. <br />
 This App was created primarily for use with a tablet as the teachers shop in the warehouse. <br />
+Below are some sample view from the application. <br /><br />
 Teacher Login
 ![image](https://user-images.githubusercontent.com/23509896/167169360-c22afa0b-2d4f-4fdf-98cc-b1e53a2be200.png)
 Teacher Confirmation/Update Info Page
