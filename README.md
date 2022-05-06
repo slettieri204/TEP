@@ -12,6 +12,7 @@ Teacher Confirmation/Update Info Page
 Teacher Shopping page
 ![image](https://user-images.githubusercontent.com/23509896/167207758-18068b5a-2df4-4951-9190-2dd582e4d2d2.png)
 TEP Employee Dashboard View
-![image](https://user-images.githubusercontent.com/23509896/167218775-bc4af2b7-5a72-44dc-bf20-f5528d71dcbe.png)
+![image](https://user-images.githubusercontent.com/23509896/167218940-3f96199a-91d7-4eab-928a-736256a62ddb.png)
+
 
 
