@@ -9,3 +9,6 @@ Teacher Login
 ![image](https://user-images.githubusercontent.com/23509896/167169360-c22afa0b-2d4f-4fdf-98cc-b1e53a2be200.png)
 Teacher Confirmation/Update Info Page
 ![image](https://user-images.githubusercontent.com/23509896/167169702-2ef5993e-1936-45aa-af38-86b8e4b57fd5.png)
+Teacher Shopping page
+![image](https://user-images.githubusercontent.com/23509896/167207758-18068b5a-2df4-4951-9190-2dd582e4d2d2.png)
+
