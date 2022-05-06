@@ -583,7 +583,7 @@ class WorkQueue(DatatableView):
         {'filter_value':'x','tab_name':"Pending"},
         {'filter_value':'y','tab_name':"Approved"},
         {'filter_value':'z','tab_name':"Rejected"},
-        {'filter_value':'ab','tab_name':"Poopers"},
+
         ]
         context['tab_list']  = tab_list
         return context
