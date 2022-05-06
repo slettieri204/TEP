@@ -9,8 +9,6 @@ from .models import *
 import datetime
 
 
-#Jay im using python3.8 and unicode csv seems to not be supported.
-#Im going to put these functions in a try except so that it doesnt fail for me when I use runserver
 
 def ExportOrderSinceLast(request, csv_file_name,model_name,header_list):
     try:
