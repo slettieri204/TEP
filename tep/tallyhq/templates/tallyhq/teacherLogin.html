@@ -1,0 +1,75 @@
+{% extends 'tallyhq/index.html' %}
+
+
+
+{% block content %}
+<div class="ui segment">
+<div class="ui inverted blue segment">
+    <h2 class="ui center aligned icon header">
+  <i class="white user circle icon"></i>
+  Teacher Login
+</h2>
+</div>
+
+    {% if form.errors %}
+    <div class="ui red message">
+        <i class="close icon"></i>
+          {% for field in form %}
+              <!-- {% for error in field.errors %}
+                   {{field.label}}: {{ error|escape }}
+              {% endfor %} -->
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+               {{ error|escape }}
+          {% endfor %}
+    </div>
+    {% endif %}
+
+
+<form method="post" action="/tallyhq/teacherlogin/" enctype="multipart/form-data" >
+    {% csrf_token %}
+
+
+<div class="ui massive form">
+    <div class="required field">
+        <label>First name:</label>
+        <input type="text" name="first_name" placeholder="First Name"  value="{{ form.first_name.value |default_if_none:''  }}" required>
+    </div>
+    <div class="required field">
+        <label>Last name:</label>
+        <input type="text" name="last_name" placeholder="Last Name" value="{{ form.last_name.value |default_if_none:'' }}" required>
+    </div>
+    <div class="required field">
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="Email Address" value="{{ form.email.value |default_if_none:''  }}" required>
+    </div>
+
+    <div class="required field">
+        <label>School:</label>
+
+
+      <div class="ui search selection dropdown" >
+        <input type="hidden" name="school" id="id_school" required>
+        <i class="dropdown icon"></i>
+        <div class="default text">Blank</div>
+        <div class="menu">
+           {% for choice in form.school.field.choices %}
+          <div class="item" data-value="{{choice.0}}">{{choice.1}}</div>
+          {% endfor %}
+        </div>
+      </div>
+
+
+    </div>
+    <button class="ui massive blue submit button">Login</button>
+    </div>
+
+
+
+    </form>
+
+
+</div>
+
+{% endblock %}
+

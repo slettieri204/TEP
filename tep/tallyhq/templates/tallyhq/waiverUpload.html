@@ -1,0 +1,18 @@
+{% extends 'tallyhq/index.html' %}
+
+{% block content %}
+<div class='ui container'>
+	<form method="post" action="/tallyhq/waiverupload/" enctype="multipart/form-data" id='waiveruploadform'> 
+	{% csrf_token %}
+    <label for="file" class=" ui icon massive button">
+        <i class="file icon"></i>
+        Upload Waiver</label>
+    <input type="file" id="file" name="file" style="display:none" onchange="form.submit()" class="inputfile" id="embedpollfileinput" >
+    </form>
+
+</div>
+{% endblock %}
+
+{% block js_content %}
+
+{% endblock %}

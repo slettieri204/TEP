@@ -1,0 +1,83 @@
+{% extends 'tallyhq/index.html' %}
+{% block content %}
+
+<style type="text/css">
+  .ui.orange.button, .ui.orange.buttons .button {
+    background-color: #fd9d14;
+    color: #fff;
+    text-shadow: none;
+    background-image: none;
+}  
+
+.ui.action.input:not([class*="left action"])>input {
+    border-right-color: rgba(34,36,38,.15)!important;
+}
+
+
+</style>
+<div class="ui container" style="width: 85%;padding-top: 1rem;">
+    <br>
+    <div class="ui segments">
+        <h1 class="ui top massive inverted white attached header center aligned">
+                   Place an Order&nbsp;&nbsp; <i>(click an item to take the max)</i>
+        </h1>
+      <div class="ui attached segment"><form class="ui massive form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {% for thing in stuff %}
+        {% for form in titles %}
+        <div class="equal width fields">
+            <div class="field form-group">
+                <div class="ui action input">
+                      <div class="ui center aligned grid button orange" style="width:70%;" onclick="set_max('id_F{{thing.id}}','{{thing.max_units}}'  )" ><h1>{{thing.unit_label_name}} (max: {{thing.max_units}}) </h1></div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input style="width:10%;" type="number" name="{{thing.name}}" max="{{thing.max_units}}" min="0" placeholder="0" id="id_F{{thing.id}}" />&nbsp;&nbsp;
+<!--                       <a style="width:10%;" class="ui center aligned grid button blue" id="max_id_{{thing.name}}" onclick="set_max('id_{{thing.name}}','{{thing.max_units}}'  )"><i class="big arrow alternate circle up icon"></i><h3 style="margin-top: 10;"><i> Max </i></h3></a> -->
+
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endfor %}
+        <div class="ui red horizontal divider">
+              <h2> <i>Please hand device to employee</i></h2>
+              </div>
+        <div class="field">
+            <input type="password" name="password_entered" placeholder="Enter password for TallyHQ">
+            <input type="hidden" id="password_stored" name="password_stored" value="{{password}}">
+          </div>
+          <a class="password-check" ></form>
+        <button class="ui fluid blue massive  submit button" type="submit">Submit</button>
+        </a>
+      </form></div>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+
+{% block js_content %}
+<script type="text/javascript" language="JavaScript">
+
+$(document).ready(function() {
+    $("form").submit(function(e){
+        var passStored = $('[name=password_stored]').val();
+        var passEntered = $('[name=password_entered]').val();
+
+        if (passStored == passEntered){
+        } else {
+        alert("Password is incorrect, please see TEP staff for help placing this order.");
+        e.preventDefault(e);
+        }
+        });
+        });
+</script>
+
+<script>
+set_max = function(target_id,max){
+    $('#'+target_id).val(max);
+}
+</script>
+
+{% endblock %}

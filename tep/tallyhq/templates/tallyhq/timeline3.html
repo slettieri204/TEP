@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <script src="//unpkg.com/timelines-chart@2"></script>
+</head>
+
+<body>
+  <div id="myPlot"></div>
+</body>
+
+
+  <script>
+
+    var my_data = [
+  {
+     categoryLabels: [""],
+    group: "group1name",
+    data: [
+      {
+        timeFormat: '%Y-%m-%d',
+        label: "label1name",
+        data: [
+          {
+            timeRange: [new Date(2014,1,1),new Date(2016,1,1)],
+            val: 32
+          },
+          {
+            timeRange: [new Date(2016,2,1),new Date(2016,4,1)],
+            val: 38
+          },
+          {
+            timeRange: [new Date(2016,5,1),new Date(2016,7,1)],
+            val: 50
+          },
+        ]
+      }]
+    }
+    ]
+  //     {
+  //       label: "label2name",
+  //       data: [...]
+  //     },
+  //     (...)
+  //   ],
+  // },
+  // {
+  //   group: "group2name",
+  //   data: [...]
+  // },
+  // (...)
+
+
+
+    TimelinesChart()
+      .data(my_data)
+      (document.getElementById('myPlot'));
+  </script>
+
+
+</html>
+
+

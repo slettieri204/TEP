@@ -1,0 +1,103 @@
+{% extends 'tallyhq/index.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<style type="text/css">
+
+.ui.table {
+    font-size: 1.4em;
+}
+
+
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+tr {
+  text-align: center;
+}
+td {
+  text-align: center;
+}
+
+
+</style>
+<div class="ui container"><br>
+<h1> Work Queue </h1>
+<div class="ui divider"></div>
+<i>You can work items here </i>
+<br><br>
+
+
+
+<br><br><br>
+
+        <div class="row">
+            <div class="fourteen wide column">
+                <div class="ui segments">
+                    <div class="ui compact segment" style="border-top-width: 2px;border-top-style: solid;border-top-color: #faa21b;">
+                        <div class="ui large header" style="color: #faa21b;">
+
+                            <i class=" building icon" style="display: inline;color: #faa21b;"></i>
+                            Work Items <h6 style="display: inline;"></h6> 
+
+                        </div>
+                    </div>
+                    <div class="ui secondary segment">
+                        <div class="ui segment">
+                            <div class="">
+                                <br>
+                             		   <div class="ui top attached tabular menu">
+										  {% for tab in tab_list %}
+										  		<div class="{% if active_tab == tab.filter_value %}active{% endif %} item"><a href="{% url 'wq' tab.filter_value %}" style="color:black">{{tab.tab_name}}</a></div>
+										  {% endfor %}
+										</div>
+										<div class="ui bottom attached active tab segment">
+												{{ datatable }}
+										</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+</div> <!--container -->
+{% endblock %}
+
+{% block js_content %}
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css">
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js"></script>
+
+
+
+
+<!-- Load js for initializing tables via their server-side options -->
+<script type="text/javascript" charset="utf8" src="{% static 'tallyhq/datatableview.js' %}"></script>
+<script type="text/javascript">
+    $(function(){
+        var common_options = { };
+        datatableview.initialize($('.datatable'),common_options);
+    });
+</script>
+
+
+{% endblock %}

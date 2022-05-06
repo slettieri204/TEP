@@ -1,0 +1,33 @@
+{% extends 'tallyhq/index.html' %}
+
+{% block content %}
+<div class="ui grid padded centered">
+    <div class="sixteen wide stackable grid column">
+        <div class="ui segments">
+            <div class="ui grey massive segment">
+                <div class="ui huge header">
+                    <i class="shopping cart icon"></i>
+                    Shopping Reminders
+                </div>
+            </div>
+            <div class="ui secondary segment">
+                <div class="ui massive segment">
+                    <p>
+                        Please be aware of the <b>maximum quantities</b> of each item and the <b>units</b> of each item
+                    </p>
+                </div>
+                <div class="ui massive segment">
+                    <p> Please meet a volunteer at the <b>checkout desk</b> before moving onto the incentive items.
+                        If you have questions, please talk to a TEP employee.</p>
+                </div>
+            </div>
+        </div>
+        <a class="ui massive button" href="/tallyhq/teacherwaiver/{{teacher_id}}">
+            Back
+        </a>
+        <a class="ui green massive button" href="/tallyhq/teachercheckout/{{teacher_id}}">I Understand</a>
+
+    </div>
+</div>
+
+{% endblock %}

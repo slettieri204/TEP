@@ -1,0 +1,154 @@
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<p>
+Demonstration: Use python to create the html in the table below, pass it to the django context, and then turn it into a tree with $('.tree').treegrid().<br>
+To Generate the html in python, you only have to figure out the parent ids, all easy to do, use the PKs of the objects to link things.
+</p>
+
+
+<style>
+
+/*https://www.jqueryscript.net/table/Collapsible-Data-Grid-Plugin-With-jQuery-Treegrid.html*/
+
+.treegrid-indent {width:18px; height: 18px; display: inline-block; position: relative;}
+
+.treegrid-expander {width:18px; height: 18px; display: inline-block; position: relative; cursor: pointer;}
+
+
+
+.treegrid-expander-expanded{
+    background-image: url(/static/img/collapse.png);
+    background-size: 20px 20px;
+     }
+.treegrid-expander-collapsed{
+    background-image: url(/static/img/expand.png);
+     background-size: 20px 20px;
+}
+
+/*
+table.dataTable thead th {
+  border-bottom: 0;
+}
+table.dataTable tfoot th {
+  border-top: 0;
+}
+*/
+
+/*.ui.table tr td { border-top: 0px !important; }
+.ui.table tr td { border-bottom: 0px !important; }*/
+</style>
+
+<table id="myt" class="ui selectable celled padded table dataTable tree">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+
+    </thead>
+  <tbody>
+    <!-- A package -->
+    <tr class="treegrid-1 ui info message"><td>Package 1</td>  <td></td> </tr>
+
+    <!-- A Table and its snapshots -->
+    <tr class="treegrid-2 treegrid-parent-1 "><td>Table BR_steve </td><td> X = LoanAmt, Y = LoanTerm</td></tr>
+        <tr class="treegrid-3 treegrid-parent-2"><td>Snapshot 16:  1/1/2016-1/1/2017</td><td>   <a href="#">Link to snapshot</a>  </td></tr>
+        <tr class="treegrid-4 treegrid-parent-2"><td>Snapshot 17:  1/1/2017-1/1/2018</td><td>   <a href="#">Link to snapshot</a>    </tr>
+        <tr class="treegrid-5 treegrid-parent-2"><td>Snapshot 18:  1/1/2018-1/1/2019</td><td>   <a href="#">Link to snapshot</a>   </tr>
+        <tr class="treegrid-6 treegrid-parent-2"><td>Snapshot 19: 1/1/2019-1/1/2020</td><td>    <a href="#">Link to snapshot</a>  </td></tr>
+
+    <!-- A Table and its snapshots -->
+    <tr class="treegrid-7 treegrid-parent-1"><td>Table Affiliate_steve </td><td>X = Aff_code</td></tr>
+    <tr class="treegrid-8 treegrid-parent-7"><td>Snapshot 20:  1/1/2016-1/1/2018</td><td>   <a href="#">Link to snapshot</a>  </td></tr>
+    <tr class="treegrid-9 treegrid-parent-7"><td>Snapshot 21:  1/1/2018-1/1/2020</td><td>   <a href="#">Link to snapshot</a>    </tr>
+
+
+    <!-- A Table and its snapshots -->
+    <tr class="treegrid-10 treegrid-parent-1"><td>Table YearAdder_steve </td><td>x = ModelYear</td></tr>
+    <tr class="treegrid-11 treegrid-parent-10"><td>Snapshot 24:  1/1/2016-1/1/2020</td><td>   <a href="#">Link to snapshot</a>  </td></tr>
+
+     <!-- A Table and its snapshots -->
+    <tr class="treegrid-12 treegrid-parent-1"><td>Table FICO_Adder </td><td>x = FICO Score</td></tr>
+    <tr class="treegrid-13 treegrid-parent-12"><td>Snapshot 25:  1/1/2016-1/1/2020</td><td>   <a href="#">Link to snapshot</a>  </td></tr>
+
+    <!-- A package -->
+    <tr class="treegrid-14 ui info message "><td>Package 2</td>  <td></td>  </tr>
+
+    <!-- A Table and its snapshots -->
+    <tr class="treegrid-15 treegrid-parent-14"><td>Table BR_ilana </td><td> X = LoanAmt, Y = LoanTerm</td></tr>
+    <tr class="treegrid-16 treegrid-parent-15"><td>Snapshot 91:  1/1/2016-1/1/2017</td><td>   <a href="#">Link to snapshot</a>  </td></tr>
+    <tr class="treegrid-17 treegrid-parent-15"><td>Snapshot 93:  1/1/2017-1/1/2018</td><td>   <a href="#">Link to snapshot</a>    </tr>
+    <tr class="treegrid-18 treegrid-parent-15"><td>Snapshot 99:  1/1/2018-1/1/2019</td><td>   <a href="#">Link to snapshot</a>   </tr>
+    <tr class="treegrid-19 treegrid-parent-15"><td>Snapshot 101: 1/1/2019-1/1/2020</td><td>    <a href="#">Link to snapshot</a>  </td></tr>
+
+    <!-- A Table and its snapshots -->
+    <tr class="treegrid-20 treegrid-parent-14"><td>Table Affiliate_ilana </td><td>X = Aff_code</td></tr>
+    <tr class="treegrid-21 treegrid-parent-20"><td>Snapshot 120:  1/1/2016-1/1/2018</td><td>   <a href="#">Link to snapshot</a>  </td></tr>
+    <tr class="treegrid-22 treegrid-parent-20"><td>Snapshot 130:  1/1/2018-1/1/2020</td><td>   <a href="#">Link to snapshot</a>    </tr>
+
+
+    <!-- A Table and its snapshots -->
+    <tr class="treegrid-23 treegrid-parent-14"><td>Table YearAdder_ilana </td><td>x = ModelYear</td></tr>
+    <tr class="treegrid-24 treegrid-parent-23"><td>Snapshot 132:  1/1/2016-1/1/2020</td><td>   <a href="#">Link to snapshot</a>  </td></tr>
+
+
+
+  </tbody>
+</table>
+  <br>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" ></script>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="/static/treegrid.js"></script>
+<!-- <script type="text/javascript">
+			$(document).ready(function() {
+				$('.tree').treegrid();
+                alert('poop');
+			});
+</script> -->
+
+
+<script type="text/javascript">
+    $(document).ready( function() {
+
+        $('.tree').treegrid({
+          'initialState': 'collapsed'
+        });
+
+      $('#myt').dataTable( {
+        "oSearch": {"sSearch": ""},
+        "paging": false,
+        "ordering": false
+      } );
+
+  // $('#myt_filter').on( 'keyup', function () {
+  //    console.log('poop');
+  //    $('.tree').treegrid('getRootNodes').treegrid('expand');
+  //   } );
+
+} )
+</script>
+<!--     <script type="text/javascript">
+      $(document).ready(function() {
+            $('.tree').treegrid({
+            onChange: function() {
+                console.log("changetree");
+            }, 
+            onCollapse: function() {
+               console.log("collapsetree");
+            }, 
+            onExpand: function() {
+                console.log("expandtree");
+            }});
+           
+      });
+    </script> -->
+
