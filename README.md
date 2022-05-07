@@ -1,5 +1,5 @@
 # TallyHQ: The Education Partnership Teacher Shopping App
-This was an unpaid project where I volunteered to build a web application for The Education Partnership (TEP) in Pittsburgh. <br />
+This was a project where I volunteered to build a web application for The Education Partnership (TEP) in Pittsburgh. <br />
 TallyHQ is a web application for The Education Partnership in Pittsburgh that allows public school teachers to shop at the warehouse for donated school supplies. <br />
 It was written in django and deployed using Heroku and AWS using a postgres backend database. <br />
 The login page for the app is here: http://gentle-crag-33999.herokuapp.com/ <br />
