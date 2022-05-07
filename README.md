@@ -3,6 +3,7 @@ This was a project where I volunteered to build a web application for The Educat
 TallyHQ is a web application for The Education Partnership in Pittsburgh that allows public school teachers to shop at the warehouse for donated school supplies. <br />
 It was written in django and deployed using Heroku and AWS using a postgres backend database. <br />
 The login page for the app is here: http://gentle-crag-33999.herokuapp.com/ <br />
+Since the app is using the free heroku tier, it may take 10 seconds to spin up if it has not been used recently.
 Only teachers with a valid email address can log in. <br />
 This App was created primarily for use with a tablet as the teachers shop in the warehouse. <br />
 Below are some sample views from the application. <br /><br />
